@@ -2,7 +2,7 @@
     GNU General Public License v3.0
 ]#
 
-include cpu
+include instructions, ppu
 
 proc loadRom (filePath: string) =
     try:
