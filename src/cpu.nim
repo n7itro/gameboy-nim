@@ -10,12 +10,16 @@
 const 
     (B, C, D, E, H, L, HL, A) = (0, 1, 2, 3, 4, 5, 6, 7)
 
+type
+    Flags = tuple
+        zero, negative, halfCarry, carry = false
+    
 var
-    title, rom: string
     memory: array[8192, uint8]
     reg: array[8, uint8] # B C D E H L _ A
     stackPointer, pc, cycles: uint16 = 0
-    zero, negative, halfCarry, carry = false
+    rom, title: string
+    flags: Flags
 
 
 proc nextByte: uint8 = 
@@ -27,7 +31,3 @@ proc getRegisterPair (high, low: int): uint16 =
 
 proc setRegisterPair (value: uint16, firstReg, secondReg: int) =
     discard
-
-proc setFlags (z,n,h,c = false) = 
-    (zero, negative, halfCarry, carry) = (z,n,h,c)
-

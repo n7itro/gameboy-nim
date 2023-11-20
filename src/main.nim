@@ -5,15 +5,19 @@
 include instructions, ppu
 
 proc loadRom (filePath: string) =
-    try:
+    try: 
         rom = readFile filePath
         title = rom[0x134..0x143]
+    
+    except: 
+        echo getCurrentExceptionMsg()
+        quit 0 
 
-    except:
-        echo "Failed to read ROM: ", getCurrentExceptionMsg()
-        quit 0
-
-loadRom "roms/tetris.gb"
+loadRom "roms/d.gb"
 
 while pc <= uint16 len rom:
-    cpu()
+    let opcode = int rom[pc]
+
+    execute opcode
+    inc cycles
+    inc pc

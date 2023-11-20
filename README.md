@@ -1,2 +1,1 @@
-# gameboy-nim
-A GameBoy emulator in Nim!
+# GameBoy-Nim (WIP)
