@@ -18,16 +18,18 @@ var
     memory: array[8192, uint8]
     reg: array[8, uint8] # B C D E H L _ A
     stackPointer, pc, cycles: uint16 = 0
-    rom, title: string
+    rom: string
     flags: Flags
 
 
-proc nextByte: uint8 = 
-    inc pc
+proc nextByte(amount: int = 1): uint8 = 
+    inc(pc, amount)
     uint8 rom[pc]
 
-proc getRegisterPair (high, low: int): uint16 = 
+
+proc getPair (high, low: int): uint16 = 
     uint16(reg[high] shl 8) + reg[low]
 
-proc setRegisterPair (value: uint16, firstReg, secondReg: int) =
+
+proc setPair (value: uint16, firstReg, secondReg: int) =
     discard

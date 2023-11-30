@@ -7,7 +7,7 @@ include instructions, ppu
 proc loadRom (filePath: string) =
     try: 
         rom = readFile filePath
-        title = rom[0x134..0x143]
+        #title = rom[0x134..0x143]
     
     except: 
         echo getCurrentExceptionMsg()
