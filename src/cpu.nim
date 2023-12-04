@@ -21,15 +21,12 @@ var
     rom: string
     flags: Flags
 
-
 proc nextByte(amount: int = 1): uint8 = 
     inc(pc, amount)
     uint8 rom[pc]
 
-
 proc getPair (high, low: int): uint16 = 
     uint16(reg[high] shl 8) + reg[low]
-
 
 proc setPair (value: uint16, firstReg, secondReg: int) =
     discard
