@@ -15,18 +15,18 @@ type
         zero, negative, halfCarry, carry = false
     
 var
-    memory: array[8192, uint8]
+    memory: array[0xFFFF, uint8]
     reg: array[8, uint8] # B C D E H L _ A
     stackPointer, pc, cycles: uint16 = 0
-    rom: string
     flags: Flags
 
-proc nextByte(amount: int = 1): uint8 = 
-    inc(pc, amount)
-    uint8 rom[pc]
+proc nextByte: uint8 = 
+    inc pc
+    uint8 memory[pc]
 
 proc getPair (high, low: int): uint16 = 
-    uint16(reg[high] shl 8) + reg[low]
+    (reg[high] shl 8) or reg[low]
 
-proc setPair (value: uint16, firstReg, secondReg: int) =
-    discard
+proc setPair (firstReg, secondReg: int, value: uint16) =
+    reg[firstReg] = uint8(value shr 8)
+    reg[secondReg] = uint8(value and 0xFF)
